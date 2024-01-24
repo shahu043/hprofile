@@ -14,7 +14,7 @@ jobs:
         run: mvn checkstyle:checkstyle
       
       - name: Sonar-code-analysise
-        uses: philips-software/sonar-scanner-action@1.4.0
+        uses: philips-software/sonar-scanner-action@v1
         with:
           token: ${{ secrets.SONARQUBE_TOKEN }}
           projectName: pawar
