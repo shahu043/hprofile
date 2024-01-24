@@ -12,3 +12,12 @@ jobs:
 
       - name: Checkstyle-analysise
         run: mvn checkstyle:checkstyle
+      
+      - name: Sonar-code-analysise
+        uses: philips-software/sonar-scanner-action@<version>
+        with:
+          token: ${{ secrets.SONARQUBE_TOKEN }}
+          projectName: pawar
+          projectKey: pawar
+          url: https://sonarcloud.io
+          organization: pawar
