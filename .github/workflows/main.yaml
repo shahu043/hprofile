@@ -1,1 +1,14 @@
+name: Hprofile Action
+on: push
+jobs:
+  Testing: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v4
+      
+      - name: Code Build
+        run: mvn test
 
+      - name: Checkstyle-analysise
+        run: mvn checkstyle:checkstyle
