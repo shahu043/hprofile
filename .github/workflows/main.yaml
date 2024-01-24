@@ -12,12 +12,19 @@ jobs:
 
       - name: Checkstyle-analysise
         run: mvn checkstyle:checkstyle
-      
-      - name: Sonar-code-analysise
-        uses: philips-software/sonar-scanner-action@main
+      - name: Java installation
+        uses: actions/setup-java@v3
         with:
-          token: ${{ secrets.SONARQUBE_TOKEN }}
-          projectName: pawar
-          projectKey: pawar
-          url: https://sonarcloud.io
-          organization: pawar
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+      # Setup sonar-scanner
+      - name: Setup SonarQube
+        uses: warchant/setup-sonar-scanner@v7
+      # Run sonar-scanner
+      - name: SonarQube Scan
+        run: sonar-scanner
+           -Dsonar.host.url=${{ secrets.SONAR_URL }}
+           -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+           -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+           -Dsonar.sources=$GITHUB_WORKSPACE
